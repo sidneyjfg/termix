@@ -193,6 +193,8 @@ Want to build your own? Start from the [plugin template](https://github.com/Term
 
 ## Installation
 
+Guia em português (Docker, configuração, HTTPS, backup): [docs/INSTALACAO.pt-BR.md](docs/INSTALACAO.pt-BR.md).
+
 See the [docs](https://docs.termix.site/install) for install steps on every platform.
 
 On macOS, Termix, Menu Bar Icon picks a monochrome icon (the default), a color icon or no icon. The choice is saved on this device. With the icon hidden, open Termix from the Dock to change it back, and closing the last window quits the app.
