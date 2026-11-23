@@ -193,7 +193,7 @@ Want to build your own? Start from the [plugin template](https://github.com/Term
 
 ## Installation
 
-Guia em português (Docker, configuração, HTTPS, backup): [docs/INSTALACAO.pt-BR.md](docs/INSTALACAO.pt-BR.md).
+Guia em português (Windows, Docker, configuração, HTTPS, backup): [docs/INSTALACAO.pt-BR.md](docs/INSTALACAO.pt-BR.md). Executável para Windows: [Releases](https://github.com/sidneyjfg/termix/releases/latest).
 
 See the [docs](https://docs.termix.site/install) for install steps on every platform.
 

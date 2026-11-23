@@ -10,6 +10,7 @@ Luke Gustafson e colaboradores). Os créditos são deles; a documentação ofici
 ## Índice
 
 1. [Escolha como instalar](#1-escolha-como-instalar)
+   - [Instalar no Windows (executável) e o que fazer se for bloqueado](#instalar-no-windows-executável)
 2. [Instalar com Docker (recomendado)](#2-instalar-com-docker-recomendado)
 3. [Primeiro acesso](#3-primeiro-acesso)
 4. [Configuração por variáveis de ambiente](#4-configuração-por-variáveis-de-ambiente)
@@ -26,9 +27,78 @@ Luke Gustafson e colaboradores). Os créditos são deles; a documentação ofici
 | Eu quero... | Use |
 |---|---|
 | Um servidor Termix acessível pelo navegador (a forma mais comum) | [Docker](#2-instalar-com-docker-recomendado) |
-| Um aplicativo no meu computador (Windows, macOS, Linux) | [Desktop](#9-aplicativo-de-desktop-e-celular) |
+| Um aplicativo no meu **Windows** (executável pronto, sem Docker) | [Instalar no Windows](#instalar-no-windows-executável) |
+| Um aplicativo no macOS ou Linux | [Desktop](#9-aplicativo-de-desktop-e-celular) |
 | Usar no celular | [Celular](#9-aplicativo-de-desktop-e-celular) |
 | Desenvolver ou alterar o código | [Código-fonte](#10-rodar-a-partir-do-código-fonte) |
+
+## Instalar no Windows (executável)
+
+Requisito: Windows 10 ou 11, 64 bits.
+
+1. Abra a [Release mais recente](https://github.com/sidneyjfg/termix/releases/latest) e baixe um dos
+   arquivos:
+
+   | Arquivo | Tamanho | O que é |
+   |---|---|---|
+   | `termix_windows_x64_nsis.exe` | 226 MB | Instalador padrão (plugins básicos). |
+   | `termix_windows_x64_full_nsis.exe` | 253 MB | Instalador com todos os plugins oficiais. |
+
+2. (Opcional, recomendado) Confira se o arquivo veio inteiro e sem alteração. No PowerShell, na pasta
+   do download:
+
+   ```powershell
+   Get-FileHash .\termix_windows_x64_nsis.exe -Algorithm SHA256
+   ```
+
+   O resultado deve ser igual ao hash escrito nas notas da Release.
+3. Dê dois cliques no `.exe`, aceite o pedido do Windows (UAC) e siga o assistente.
+4. Abra o Termix pelo menu Iniciar. Ele roda sozinho; para guardar os dados do seu servidor e ter
+   cópia offline, veja o plugin *Sync* na seção [9](#9-aplicativo-de-desktop-e-celular).
+
+### Se o Windows ou o navegador bloquear
+
+O instalador **não é assinado digitalmente**, então o Windows desconfia dele. Isso é esperado e há
+uma saída em cada etapa. Faça só se você confia na origem (este repositório) e o hash conferiu.
+
+**a) O navegador não deixa baixar** ("não é baixado com frequência", "arquivo perigoso"):
+
+- *Edge:* em Downloads (`Ctrl+J`), ao lado do arquivo clique em `…` → **Manter** → **Mostrar mais** →
+  **Manter mesmo assim**.
+- *Chrome:* em Downloads, clique na seta/`⋮` ao lado do arquivo → **Manter**.
+- Sem navegador, pelo PowerShell:
+
+  ```powershell
+  Invoke-WebRequest https://github.com/sidneyjfg/termix/releases/latest/download/termix_windows_x64_nsis.exe -OutFile termix.exe
+  ```
+
+**b) SmartScreen: "O Windows protegeu o computador":** clique em **Mais informações** → **Executar
+assim mesmo**.
+
+**c) O `.exe` não abre, ou o botão "Executar assim mesmo" não aparece:** o arquivo ficou marcado
+como "baixado da internet". Remova a marca:
+
+- Botão direito no arquivo → **Propriedades** → marque **Desbloquear** → **OK**; ou
+- no PowerShell: `Unblock-File .\termix_windows_x64_nsis.exe`
+
+**d) Windows Defender ou outro antivírus apagou ou bloqueou o arquivo** (falso positivo comum em
+instaladores não assinados): *Segurança do Windows* → *Proteção contra vírus e ameaças* →
+*Histórico de proteção* → abra o item bloqueado → **Ações** → **Permitir**. Se foi apagado, baixe
+de novo e, antes, adicione a pasta de downloads em *Gerenciar configurações* → *Exclusões*. Remova a
+exclusão depois de instalar.
+
+**e) Controle de Aplicativos Inteligente (Smart App Control) ligado:** ele bloqueia qualquer
+programa não assinado, sem botão de "executar mesmo assim" (mensagem típica: "um aplicativo foi
+bloqueado" / "a DLL necessária não pôde ser executada"). Não existe exceção por arquivo. A única
+saída é desligá-lo em *Segurança do Windows* → *Controle de aplicativos e navegador* → *Configurações
+do Controle de Aplicativos Inteligente* → **Desativado**. Em geral **não dá para ligar de novo** sem
+reinstalar o Windows, então só faça se aceitar isso. Alternativa sem desligar nada: rodar o Termix
+em Docker ([seção 2](#2-instalar-com-docker-recomendado)) e acessar pelo navegador.
+
+**f) Mensagem de administrador / "Seu administrador bloqueou":** o computador é gerenciado (trabalho
+ou escola) e a política proíbe o programa. Fale com o administrador de TI.
+
+Para desinstalar: *Configurações* → *Aplicativos* → *Aplicativos instalados* → Termix → **Desinstalar**.
 
 ## 2. Instalar com Docker (recomendado)
 
@@ -218,7 +288,9 @@ dados (`DATABASE_LAYER_PREUPGRADE_BACKUP_KEEP`, padrão: guarda 3). Mesmo assim,
 
 ## 9. Aplicativo de desktop e celular
 
-Baixe na [página de Releases do projeto original](https://github.com/Termix-SSH/Termix/releases):
+Para Windows x64, use a [Release deste repositório](https://github.com/sidneyjfg/termix/releases/latest)
+(veja [Instalar no Windows](#instalar-no-windows-executável)). Para os demais sistemas, baixe na
+[página de Releases do projeto original](https://github.com/Termix-SSH/Termix/releases):
 
 | Sistema | Formatos |
 |---|---|
